@@ -129,19 +129,25 @@ function iframeDialogOptions(div) {
 	});
 }
 
+function triggerIframe(href, autoLoad) {
+	buildIframe(href);
+
+	if (autoLoad) {
+		$(href).dialog();
+	}
+
+	iframeDialogOptions(href);
+}
+
 // Build when iframe comes from a link
 $('.iframe').click(function () {
 	var href = $(this).attr('href');
 
-	buildIframe(href);
-	iframeDialogOptions(href);
+	triggerIframe(href);
 });
 // Build when iframe is setup as document.onload
 if ($('.autoLoad')[0]) {
-	var autoLoadTarget = $('.autoLoad').attr('id');
-	var href = '#' + autoLoadTarget;
+	var href = '#' + ($('.autoLoad').attr('id'));
 
-	buildIframe(href);
-	$(href).dialog();
-	iframeDialogOptions(href);
+	triggerIframe(href);
 }
