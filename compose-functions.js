@@ -21,6 +21,9 @@ function compose(...funcs) {
   return (...args) => rest.reduceRight((composed, f) => f(composed), last(...args));
 }
 
+// Updated ES6 version
+const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)));
+
 /** 
  * EXAMPLE USAGE
  * function square(num) {
